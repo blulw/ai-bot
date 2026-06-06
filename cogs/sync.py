@@ -1,8 +1,9 @@
-from typing import Literal, Optional
-from main import bot, myID
 import discord
 from discord.ext import commands
 from discord import app_commands
+from typing import Literal, Optional
+
+from config import MY_ID
 
 class Sync(commands.Cog):
     def __init__(self, bot):
@@ -12,19 +13,19 @@ class Sync(commands.Cog):
     async def on_ready(self):
         print(f"{__name__} is online!")
     
-    @bot.tree.command(name="sync")
+    @app_commands.command(name="sync")
     async def ssync(self, interaction: discord.Interaction):
         try:
-            await interaction.send("test")
+            await interaction.response.send_message("test")
         except Exception as e:
-            user = await self.bot.fetch_user(myID)
+            user = await self.bot.fetch_user(MY_ID)
             await user.send("Exception in sync: ```" + str(e) + "```")
 
     @commands.command()
     @commands.guild_only()
     async def sync(self, ctx: commands.Context, guilds: commands.Greedy[discord.Object], spec: Optional[Literal["~", "*", "^"]] = None) -> None:
         try:
-            if str(ctx.author.id) == myID:
+            if ctx.author.id == MY_ID:
                 if not guilds:
                     if spec == "~":
                         synced = await ctx.bot.tree.sync(guild=ctx.guild)
@@ -56,7 +57,7 @@ class Sync(commands.Cog):
             else: 
                 await ctx.send("only bran can do that")
         except Exception as e:
-            user = await self.bot.fetch_user(myID)
+            user = await self.bot.fetch_user(MY_ID)
             await user.send("Exception in sync: ```" + str(e) + "```")
         
 async def setup(bot):

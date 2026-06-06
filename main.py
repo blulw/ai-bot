@@ -1,22 +1,17 @@
 import discord
-from dotenv import load_dotenv
 import os
 from discord.ext import commands
 import asyncio
 import logging
 import logging.handlers
 
+from config import TOKEN, MY_ID
 
-load_dotenv()
-TOKEN = os.getenv('TOKEN')
-API_TOKEN = os.getenv('API_TOKEN')
-ACCOUNT_ID = os.getenv('ACCOUNT_ID')
-myID = os.getenv('myID')
 
 intents = discord.Intents.all()
 intents.message_content = True
 
-bot = commands.Bot(command_prefix=",,", intents=intents, owner_id=myID)
+bot = commands.Bot(command_prefix=",,", intents=intents, owner_id=MY_ID)
 class MyHelpCommand(commands.MinimalHelpCommand):
     async def send_pages(self):
         destination = self.get_destination()
