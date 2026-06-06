@@ -69,7 +69,7 @@ class Util(commands.Cog):
             await user.send("Exception in purge: ```" + str(e) + "```")
             
     @commands.command()
-    async def s(self, ctx, text: str):
+    async def s(self, ctx, *, text: str):
         try:
             if ctx.author.id == MY_ID:
                 await self.bot.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.custom,  name="custom", state=text))
