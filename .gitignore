@@ -1,0 +1,11 @@
+.env
+cat.jpg
+dog.jpg
+data.txt
+bot.log
+__pycache__/
+cogs/__pycache__/
+/cogs/__pycache__
+.db
+*.pyc
+*.pk
