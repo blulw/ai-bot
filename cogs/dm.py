@@ -95,7 +95,7 @@ class Dm(commands.Cog):
     async def on_message(self, message):
         try:
             if message.channel.type is discord.ChannelType.private:
-                if message.author.id == MY_ID:
+                if message.author.id == MY_ID or str(message.author.id) == "1225927185219452958":
                     if not message.content.startswith(",,"):
                         await self.add_mem(message.content)
                         response = await self.ai_response("default", message.content, message.author.display_name)
