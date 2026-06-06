@@ -1,3 +1,4 @@
+import os
 import discord
 from discord import app_commands
 from discord.ext import commands
@@ -111,9 +112,9 @@ else:
         try:
             if message.channel.type is discord.ChannelType.private:
                 if message.author.id == int(myID):
-                    if not message.startswith(",,"):
+                    if not message.content.startswith(",,"):
                         await self.add_mem(message)
-                        response = await self.ai_response("default", message, message.user.display_name)
+                        response = await self.ai_response("default", message, message.author.display_name)
                         await message.channel.send(response)
         except Exception as e:
                     user = await self.bot.fetch_user(myID)
