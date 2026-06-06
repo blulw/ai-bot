@@ -26,14 +26,20 @@ bot.help_command = MyHelpCommand()
 defaultPrefix = "`"
 prefix = defaultPrefix
 
+filename = "status.txt"
 
-
+if os.path.exists(filename) and os.path.getsize(filename) > 0:
+    with open(filename, 'r', encoding='utf-8') as fi:
+        currentStatus = fi.read()
+else:
+    currentStatus = ""
+    
 @bot.event
 async def on_ready():
     print("Bot ready!")
     await bot.change_presence(
         status=discord.Status.online,
-        activity=discord.Activity(type=discord.ActivityType.custom, name="i went to the beach that makes you old")
+        activity=discord.Activity(type=discord.ActivityType.custom, name="custom", state=currentStatus)
     )
     print('status set')
    

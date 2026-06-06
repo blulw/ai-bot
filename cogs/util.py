@@ -5,6 +5,8 @@ from discord import app_commands
 
 from config import MY_ID
 
+statusfilename = "status.txt"
+
 class Util(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -65,6 +67,18 @@ class Util(commands.Cog):
         except Exception as e:
             user = await self.bot.fetch_user(MY_ID)
             await user.send("Exception in purge: ```" + str(e) + "```")
+            
+    @commands.command()
+    async def s(self, ctx, text: str):
+        try:
+            if ctx.author.id == MY_ID:
+                await self.bot.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.custom,  name="custom", state=text))
+                with open(statusfilename, 'w', encoding='utf-8') as fi:
+                    fi.write(text)
+                await ctx.send("done :)")
+        except Exception as e:
+            user = await self.bot.fetch_user(MY_ID)
+            await user.send("Exception in s: ```" + str(e) + "```")
 
 async def setup(bot):
     await bot.add_cog(Util(bot))
