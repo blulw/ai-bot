@@ -22,7 +22,6 @@ prompts = {
     "none": ""
 }
 
-memory = []
 maxmemory = 50
 
 filename = 'memory.pk'
@@ -32,15 +31,18 @@ class Dm(commands.Cog):
         self.bot = bot
 
 
-with open(filename, 'rb') as fi:
-    memory = pickle.load(fi)
+if os.path.exists(filename) and os.path.getsize(filename) > 0:
+    with open(filename, 'rb') as fi:
+        memory = pickle.load(fi)
+else:
+    memory = []
 
     @commands.Cog.listener()
     async def on_ready(self):
         print(f"{__name__} is online!")
 
     async def ai_response(self, character, prompt, name):
-            if character in prompts:
+pleas            if character in prompts:
                 initial_prompt = prompts[character] + name + " Here is the user's prompt: "
                 local_memory = "\n".join(memory)
                 local_memory = local_memory[len(memory) - 5000:]
