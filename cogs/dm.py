@@ -58,7 +58,7 @@ class Dm(commands.Cog):
             result = response.json().get("choices", {})
             if result:
                 response_text = result[0].get("message", {}).get("content", "No response")
-                return f"{character.title()}: {response_text}"
+                return "{response_text}"
             return "No response generated."
 
         return f"Error: {response.status_code}"
