@@ -112,7 +112,7 @@ with open(filename, 'rb') as fi:
                 if message.author.id == int(myID):
                     if not message.startswith(",,"):
                         await self.add_mem(message)
-                        response = await self.ai_response(message, message.user.display_name)
+                        response = await self.ai_response("default", message, message.user.display_name)
                         await message.channel.send(response)
         except Exception as e:
                     user = await self.bot.fetch_user(myID)
