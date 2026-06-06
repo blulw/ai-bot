@@ -56,8 +56,7 @@ pleas            if character in prompts:
                     "model": "llama-3.1-8b-instant",
                     "messages": messages
                 }
-                    
-                    
+
                 response = requests.post(url, headers=headers, data=json.dumps(data))
 
                 if response.status_code == 200:
@@ -80,7 +79,7 @@ pleas            if character in prompts:
                 memory.pop(0)
             with open(filename, 'wb') as fi:
                 pickle.dump(memory, fi)
-                
+
 
     @commands.command(aliases=["mem"])
     async def printmem(self, ctx):
@@ -91,7 +90,7 @@ pleas            if character in prompts:
             for chunk in chunks:
                 await ctx.send(f"memory chunk {i}: {chunk}")
                 i = i+1
-    
+
     @commands.command(aliases=["clear"])
     async def clearmem(self, ctx):
         if int(ctx.author.id) == int(myID):
