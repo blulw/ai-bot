@@ -3,7 +3,7 @@
     {
       "name": "ai-bot",
       "script": "/home/bran/ai-bot/main.py",
-      "interpreter": "/home/bran/ai-bot/.sourcevenv/bin/python",
+      "interpreter": "/home/bran/ai-bot/.venv/bin/python",
       "cwd": "/home/bran/ai-bot",
       "env": {
         "PYTHONUNBUFFERED": "1"
