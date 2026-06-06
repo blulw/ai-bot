@@ -42,33 +42,33 @@ else:
         print(f"{__name__} is online!")
 
     async def ai_response(self, character, prompt, name):
-pleas            if character in prompts:
-                initial_prompt = prompts[character] + name + " Here is the user's prompt: "
-                local_memory = "\n".join(memory)
-                local_memory = local_memory[len(memory) - 5000:]
-                memory_prompt = "This is the last 50 messages of this channel (may be cut off due to character count restrictions.): " + local_memory + "\n"
-                messages =[
-                    {"role": "system", "content": memory_prompt},
-                    {"role": "system", "content": initial_prompt},
-                    {"role": "user", "content": prompt},
-                ]
-                data = {
-                    "model": "llama-3.1-8b-instant",
-                    "messages": messages
-                }
+                if character in prompts:
+                    initial_prompt = prompts[character] + name + " Here is the user's prompt: "
+                    local_memory = "\n".join(memory)
+                    local_memory = local_memory[len(memory) - 5000:]
+                    memory_prompt = "This is the last 50 messages of this channel (may be cut off due to character count restrictions.): " + local_memory + "\n"
+                    messages =[
+                        {"role": "system", "content": memory_prompt},
+                        {"role": "system", "content": initial_prompt},
+                        {"role": "user", "content": prompt},
+                    ]
+                    data = {
+                        "model": "llama-3.1-8b-instant",
+                        "messages": messages
+                    }
 
-                response = requests.post(url, headers=headers, data=json.dumps(data))
+                    response = requests.post(url, headers=headers, data=json.dumps(data))
 
-                if response.status_code == 200:
-                    result = response.json().get("choices", {})
-                    if result:
-                        response_text = result[0].get("message", {}).get("content", "No response")
-                        response = f"{character.title()}: {response_text}"
+                    if response.status_code == 200:
+                        result = response.json().get("choices", {})
+                        if result:
+                            response_text = result[0].get("message", {}).get("content", "No response")
+                            response = f"{character.title()}: {response_text}"
+                        else:
+                            response = "No response generated."
                     else:
-                        response = "No response generated."
-                else:
-                    response = f"Error: {response.status_code}"
-                return response
+                        response = f"Error: {response.status_code}"
+                    return response
 
     async def add_mem(self, message):
         if "memory chunk" in message.lower():
