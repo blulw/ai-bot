@@ -117,8 +117,8 @@ else:
                         response = await self.ai_response("default", message, message.author.display_name)
                         await message.channel.send(response)
         except Exception as e:
-                    user = await self.bot.fetch_user(myID)
-                    await user.send("Exception in dmai: ```" + str(e) + "```")
+            user = await self.bot.fetch_user(myID)
+            await user.send("Exception in dmai: ```" + str(e) + "```")
 
 async def setup(bot):
     await bot.add_cog(Dm(bot))
